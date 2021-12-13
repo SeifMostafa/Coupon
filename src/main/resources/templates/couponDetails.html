@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Coupon Details</title>
+</head>
+<body>
+<h2>Coupon Details</h2>
+Code:<b th:text="${coupon.getCode()}"></b><br/>
+Discount:<b th:text="${coupon.getDiscount()}"></b><br/>
+Expiry Date:<b th:text="${coupon.getExpDate()}"></b><br/>
+</body>
+</html>
