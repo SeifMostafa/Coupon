@@ -3,10 +3,13 @@ package com.musala.couponservice.controllers;
 import com.musala.couponservice.model.Coupon;
 import com.musala.couponservice.repos.CouponRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.security.RolesAllowed;
 
 @Controller
 public class CouponController {
@@ -14,17 +17,14 @@ public class CouponController {
     @Autowired
     CouponRepo couponRepo;
 
-//    @GetMapping("/")
-//    public String index() {
-//        return "index";
-//    }
-
     @GetMapping("/showCreateCoupon")
+    @PreAuthorize("hasRole('ADMIN')")
     public String showCreateCoupon() {
         return "createCoupon";
     }
 
     @PostMapping("/saveCoupon")
+    @RolesAllowed("ADMIN")
     public String saveCoupon(Coupon coupon) {
         couponRepo.save(coupon);
         return "createResponse";

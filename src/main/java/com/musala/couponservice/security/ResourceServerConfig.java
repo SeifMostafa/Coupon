@@ -6,8 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -16,12 +18,20 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 
 import java.security.KeyPair;
 
-@Configuration
+//@Configuration
+//@EnableAuthorizationServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String RESOURCE_ID = "couponservice";
     @Value("${publicKey}")
     private String publicKey;
+
+//    @Value("${keyFile}")
+//    private String keyFile;
+//    @Value("${password}")
+//    private String password;
+//    @Value("${alias}")
+//    private String alias;
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -40,6 +50,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter(){
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+//        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource(keyFile), password.toCharArray());
+//        KeyPair keyPair = keyStoreKeyFactory.getKeyPair(alias);
+//        jwtAccessTokenConverter.setKeyPair(keyPair);
+       // jwtAccessTokenConverter.setSigningKey("testkey");
         jwtAccessTokenConverter.setVerifierKey(publicKey);
         return jwtAccessTokenConverter;
     }

@@ -42,6 +42,7 @@ public class UserController {
     PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
+
     public String login(String email, String password) {
         boolean login = securityService.login(email, password);
         if (login) {
