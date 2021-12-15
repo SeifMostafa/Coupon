@@ -1,6 +1,5 @@
 package com.musala.couponservice.model;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
